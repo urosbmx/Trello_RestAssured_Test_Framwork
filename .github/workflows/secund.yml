@@ -31,4 +31,4 @@ jobs:
           maven-version: 3.8.2
 
       - name: Run regression
-        run: mvn clean test -Dsurefire.suiteXmlFiles=testNG/${{ github.event.inputs.chosen-os }}.xml
+        run: mvn clean test -Dsurefire.suiteXmlFiles=testNG/${{ github.event.inputs.chose-feature}}.xml
