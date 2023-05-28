@@ -23,5 +23,5 @@ jobs:
         with:
           maven-version: 3.8.2
 
-      - name: Set UP All and run test
-        run: mvn clean install
+      - name: Run regression
+        run: mvn clean test -Dsurefire.suiteXmlFiles=regresion.xml
