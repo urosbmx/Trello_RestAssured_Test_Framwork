@@ -3,15 +3,13 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
 
-import java.util.Map;
-
 import static io.restassured.RestAssured.expect;
 import static io.restassured.RestAssured.urlEncodingEnabled;
 
-public class POST_Request {
+public class PUT_Request {
 
 
-    public static void POSTRequest(String URL, String queryParams, String body, String URL_Sufix, Boolean extraStep, int expectStatusCode, String parametarResponse, String expactValue){
+    public static void PUTRequest(String URL, String queryParams, String body, String URL_Sufix, Boolean extraStep, int expectStatusCode, String parametarResponse, String expactValue){
         urlEncodingEnabled = false;
         Response response =null;
         try {
@@ -22,7 +20,7 @@ public class POST_Request {
                         .body(body)
                         .log()
                         .all()
-                        .post(URL_Sufix)
+                        .put(URL_Sufix)
                         .then()
                         .log()
                         .all()

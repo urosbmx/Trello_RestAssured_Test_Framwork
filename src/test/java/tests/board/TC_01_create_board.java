@@ -1,27 +1,31 @@
-package tests.board.Create_Board;
-
-import DataProvider.propertyReader;
-import io.restassured.RestAssured;
+package tests.board;
 import org.testng.annotations.Test;
-import static DataProvider.dataProvider.Key;
-import static DataProvider.dataProvider.Token;
 
+import java.util.HashMap;
+import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
+
+import static DataProvider.dataProvider.*;
 import static io.restassured.RestAssured.given;
+import static methodes.DELETE_Request.DELETERequest;
+import static methodes.POST_Request.POSTRequest;
+import static methodes.PUT_Request.PUTRequest;
 
 public class TC_01_create_board {
 
     String API_Key = Key;
     String API_Token= Token;
+
     public String createBoard(){
-        RestAssured.baseURI="https://api.trello.com/1/boards/";
         String Response =  given()
+                .baseUri(baseURL)
                 .log()
                 .all()
                 .queryParam("name","UrosTest")
                 .queryParam("key", API_Key)
                 .queryParam("token",API_Token)
                 .body("")
-                .post()
+                .post(bordSufix)
                 .then()
                 .log()
                 .all()
@@ -34,37 +38,35 @@ public class TC_01_create_board {
     String ID=createBoard();
     @Test(priority=1)
 public void renameBoard(){
-        RestAssured.baseURI="https://api.trello.com/1/boards/";
-        given()
-                .log()
-                .all()
-                .queryParam("name","Zikica_Test_board")
-                .queryParam("key", API_Key)
-                .queryParam("token",API_Token)
-                .body("")
-                .put(ID)
-                .then()
-                .log()
-                .all()
-                .assertThat()
-                .statusCode(200);
+        Map<String,String> qvery = new HashMap<>();
+        qvery.put("name","New board name");
+        qvery.put("key",API_Key);
+        qvery.put("token",API_Token);
+        String mapAssString = StringUtils.join(qvery.entrySet(),"&");
+        PUTRequest(baseURL,mapAssString,"",bordSufix+ID,true,200,"name","New board name");
     }
+
 
 
     @Test(priority=2)
     public void deleteBoard(){
-        RestAssured.baseURI="https://api.trello.com/1/boards/";
-        given()
-                .queryParam("key", API_Key)
-                .queryParam("token",API_Token)
-                .body("")
-                .log()
-                .all()
-                .delete(ID)
-                .then()
-                .log()
-                .all()
-                .statusCode(200);
+        Map<String,String> qvery = new HashMap<>();
+        qvery.put("key",API_Key);
+        qvery.put("token",API_Token);
+        String mapAssString = StringUtils.join(qvery.entrySet(),"&");
+        DELETERequest(baseURL,mapAssString,"",bordSufix+ID,true,200,"_value","null");
+
     }
+
+    @Test
+    public void createBoardWithOutName(){
+        Map<String,String> qvery = new HashMap<>();
+        qvery.put("key",API_Key);
+        qvery.put("token",API_Token);
+        String mapAssString = StringUtils.join(qvery.entrySet(),"&");
+        POSTRequest(baseURL,"Connection","keep-alive",mapAssString,"",bordSufix,true,400,"message","invalid value for name");
+    }
+
+
 
 }
