@@ -35,7 +35,6 @@ public void renameBoard(){
         qvery.put("token",API_Token);
         String mapAssString = StringUtils.join(qvery.entrySet(),"&");
         DELETERequest(baseURL,mapAssString,"",bordSufix+ID,true,200,"_value","null");
-
     }
 
     @Test
@@ -59,7 +58,6 @@ public void renameBoard(){
         PUTRequest(baseURL,mapAssString,"",bordSufix+newBord,false,200,"test","test");
 
     }
-
 
     @Test
     public void deleteNoneExistingBoard() throws NoSuchAlgorithmException {
