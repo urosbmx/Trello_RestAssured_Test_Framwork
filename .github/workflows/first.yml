@@ -3,7 +3,6 @@ on:
   [push,workflow_dispatch]
 jobs:
   run-all-tests:
-
     runs-on: ubuntu-latest
     steps:
 
@@ -15,7 +14,7 @@ jobs:
         with:
           java-version: 17
           distribution: 'adopt'
-          
+
       - name: Set up Maven
         uses: stCarolas/setup-maven@v4.5
         with:
@@ -25,4 +24,4 @@ jobs:
         run: mvn clean test -Dsurefire.suiteXmlFiles=regresion.xml
 
       - name: Report
-        run: {{toJSON(github)}}
+        run: {{ toJSON(github) }}
