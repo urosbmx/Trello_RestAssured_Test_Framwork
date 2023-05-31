@@ -2,9 +2,14 @@ package tests.board;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
+
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 
 import static DataProvider.dataProvider.*;
 import static io.restassured.RestAssured.given;
@@ -73,13 +78,16 @@ public void renameBoard(){
     }
 
     @Test
-    public void deleteNoneExistingBoard(){
+    public void deleteNoneExistingBoard() throws NoSuchAlgorithmException {
         String nonExistingBoard = "64739531a86cfcceef46687c";
         Map<String,String> qvery = new HashMap<>();
         qvery.put("key",API_Key);
         qvery.put("token",API_Token);
         String mapAssString = StringUtils.join(qvery.entrySet(),"&");
         DELETERequest(baseURL,mapAssString,"",bordSufix+nonExistingBoard,true,404,"","The requested resource was not found.");
+
+
+
     }
 
 
