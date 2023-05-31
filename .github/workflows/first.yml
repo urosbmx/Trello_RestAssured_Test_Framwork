@@ -22,6 +22,3 @@ jobs:
 
       - name: Run regression
         run: mvn clean test -Dsurefire.suiteXmlFiles=regresion.xml
-
-      - name: Report
-        run: {{ toJSON(github) }}
