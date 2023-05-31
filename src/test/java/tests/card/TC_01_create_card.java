@@ -2,7 +2,6 @@ package tests.card;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-
 import java.util.HashMap;
 import java.util.Map;
 
