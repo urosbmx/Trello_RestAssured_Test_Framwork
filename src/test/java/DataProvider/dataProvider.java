@@ -1,6 +1,5 @@
 package DataProvider;
 
-import java.util.Properties;
 
 public class dataProvider {
 

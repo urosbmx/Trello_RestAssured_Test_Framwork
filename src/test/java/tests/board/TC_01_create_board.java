@@ -1,22 +1,17 @@
 package tests.board;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-
 import static DataProvider.dataProvider.*;
-import static io.restassured.RestAssured.given;
 import static methodes.DELETE_Request.DELETERequest;
 import static methodes.POST_Request.POSTRequest;
 import static methodes.PUT_Request.PUTRequest;
 import static preconditions.createBoard.*;
+
 public class TC_01_create_board {
 
     String API_Key = Key;
@@ -32,8 +27,6 @@ public void renameBoard(){
         String mapAssString = StringUtils.join(qvery.entrySet(),"&");
         PUTRequest(baseURL,mapAssString,"",bordSufix+ID,true,200,"name","New board name");
     }
-
-
 
     @Test(priority=2)
     public void deleteBoard(){
@@ -67,15 +60,6 @@ public void renameBoard(){
 
     }
 
-    @AfterClass
-    public void deleteClosedBoard(){
-        Map<String,String> qvery = new HashMap<>();
-        qvery.put("key",API_Key);
-        qvery.put("token",API_Token);
-        String mapAssString = StringUtils.join(qvery.entrySet(),"&");
-        DELETERequest(baseURL,mapAssString,"",bordSufix+newBord,true,200,"_value","null");
-
-    }
 
     @Test
     public void deleteNoneExistingBoard() throws NoSuchAlgorithmException {
@@ -85,8 +69,14 @@ public void renameBoard(){
         qvery.put("token",API_Token);
         String mapAssString = StringUtils.join(qvery.entrySet(),"&");
         DELETERequest(baseURL,mapAssString,"",bordSufix+nonExistingBoard,true,404,"","The requested resource was not found.");
-
-
+    }
+    @AfterClass
+    public void deleteClosedBoard(){
+        Map<String,String> qvery = new HashMap<>();
+        qvery.put("key",API_Key);
+        qvery.put("token",API_Token);
+        String mapAssString = StringUtils.join(qvery.entrySet(),"&");
+        DELETERequest(baseURL,mapAssString,"",bordSufix+newBord,true,200,"_value","null");
 
     }
 
