@@ -1,14 +1,17 @@
 package methodes;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.*;
 import org.testng.Assert;
 
+import java.io.File;
+
 import static io.restassured.RestAssured.*;
 
 public class GET_Request {
-    public static Response GETRequest(String baseURL, String header, String URL_Sufix, String queryParametar, boolean extraStep, int expectStatusCode, JsonNode expactJSON) {
+    public static Response GETRequest(String baseURL, String header, String URL_Sufix, String queryParametar, boolean extraStep, int expectStatusCode, JsonNode expactJSON,String jsonSchema_Path) {
         urlEncodingEnabled = false;
         Response response = null;
         ObjectMapper objectMapper = new ObjectMapper();
@@ -24,6 +27,7 @@ public class GET_Request {
                     .then()
                     .log()
                     .all()
+                    .body(JsonSchemaValidator.matchesJsonSchema(new File(jsonSchema_Path)))
                     .extract()
                     .response();
             int responseCode = response.statusCode();

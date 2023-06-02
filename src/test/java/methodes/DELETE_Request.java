@@ -1,7 +1,10 @@
 package methodes;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
+
+import java.io.File;
 
 import static io.restassured.RestAssured.expect;
 import static io.restassured.RestAssured.urlEncodingEnabled;
@@ -9,7 +12,7 @@ import static io.restassured.RestAssured.urlEncodingEnabled;
 public class DELETE_Request {
 
 
-    public static void DELETERequest(String URL, String queryParams, String body, String URL_Sufix, Boolean extraStep, int expectStatusCode, String parametarResponse, String expactValue){
+    public static Response DELETERequest(String URL, String queryParams, String body, String URL_Sufix, Boolean extraStep, int expectStatusCode, String parametarResponse, String expactValue, String jsonSchema_Path){
         urlEncodingEnabled = false;
         Response response =null;
         try {
@@ -24,6 +27,7 @@ public class DELETE_Request {
                         .then()
                         .log()
                         .all()
+                        .body(JsonSchemaValidator.matchesJsonSchema(new File(jsonSchema_Path)))
                         .extract()
                         .response();
 
@@ -35,7 +39,6 @@ public class DELETE_Request {
                         if(!parametarResponse.equals("")){
                             JsonPath jsonPath= response.jsonPath();
                             String parametar = jsonPath.get(parametarResponse);
-
 
                             if(parametar.equals(expactValue)){
                                 Assert.assertEquals(parametar,expactValue);
@@ -53,5 +56,6 @@ public class DELETE_Request {
         }catch (Exception ex){
             System.out.println(ex.getMessage());
         }
+        return response;
     }
 }
