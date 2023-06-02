@@ -4,10 +4,13 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import static io.restassured.RestAssured.expect;
 import static io.restassured.RestAssured.urlEncodingEnabled;
+import io.restassured.module.jsv.JsonSchemaValidator;
+
+import java.io.File;
 
 public class POST_Request {
 
-    public static void POSTRequest(String URL, String header,String headerValue, String queryParams, String body, String URL_Sufix, Boolean extraStep, int expectStatusCode, String parametarResponse, String expactValue){
+    public static Response POSTRequest(String URL, String header, String headerValue, String queryParams, String body, String URL_Sufix, Boolean extraStep, int expectStatusCode, String parametarResponse, String expactValue, String jsonSchema_Path){
         urlEncodingEnabled = false;
         Response response =null;
         try {
@@ -23,6 +26,7 @@ public class POST_Request {
                         .then()
                         .log()
                         .all()
+                        .body(JsonSchemaValidator.matchesJsonSchema(new File(jsonSchema_Path)))
                         .extract()
                         .response();
 
@@ -52,5 +56,6 @@ public class POST_Request {
         }catch (Exception ex){
             System.out.println(ex.getMessage());
         }
+        return response;
     }
 }

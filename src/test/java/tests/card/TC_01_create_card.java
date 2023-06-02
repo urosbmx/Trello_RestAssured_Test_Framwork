@@ -25,9 +25,10 @@ public class TC_01_create_card {
         qvery.put("key",API_Key);
         qvery.put("token",API_Token);
         String mapAssString = StringUtils.join(qvery.entrySet(),"&");
-
-        POSTRequest(baseURL,"Accept","application/json", mapAssString,"",cardSufix,false,200,"","");
+        POSTRequest(baseURL,"Accept","application/json", mapAssString,"",cardSufix,false,200,"","","src/test/resources/json_schemas/create_card_schema.json");
     }
+
+
 
 
 
@@ -37,7 +38,7 @@ public class TC_01_create_card {
         qvery.put("key",API_Key);
         qvery.put("token",API_Token);
         String mapAssString = StringUtils.join(qvery.entrySet(),"&");
-        DELETERequest(baseURL,mapAssString,"",bordSufix+newBord,true,200,"_value","null");
+        DELETERequest(baseURL,mapAssString,"",bordSufix+newBord,true,200,"_value","null","src/test/resources/json_schemas/delete_board_schema.json");
 
     }
 }
