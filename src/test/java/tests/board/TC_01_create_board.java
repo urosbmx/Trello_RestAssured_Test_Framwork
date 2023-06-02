@@ -21,11 +21,11 @@ public class TC_01_create_board {
     @Test(priority=1)
 public void renameBoard(){
         Map<String,String> qvery = new HashMap<>();
-        qvery.put("name","New board name");
+        qvery.put("name","New-board_name");
         qvery.put("key",API_Key);
         qvery.put("token",API_Token);
         String mapAssString = StringUtils.join(qvery.entrySet(),"&");
-        PUTRequest(baseURL,mapAssString,"",bordSufix+ID,true,200,"name","New board name");
+        PUTRequest(baseURL,mapAssString,"",bordSufix+ID,true,200,"name","New-board_name","src/test/resources/json_schemas/board/rename_board_schema.json");
     }
 
     @Test(priority=2)
@@ -34,7 +34,7 @@ public void renameBoard(){
         qvery.put("key",API_Key);
         qvery.put("token",API_Token);
         String mapAssString = StringUtils.join(qvery.entrySet(),"&");
-        DELETERequest(baseURL,mapAssString,"",bordSufix+ID,true,200,"_value","null");
+        DELETERequest(baseURL,mapAssString,"",bordSufix+ID,true,200,"_value","null","src/test/resources/json_schemas/delete_board_schema.json");
 
     }
 
@@ -44,7 +44,7 @@ public void renameBoard(){
         qvery.put("key",API_Key);
         qvery.put("token",API_Token);
         String mapAssString = StringUtils.join(qvery.entrySet(),"&");
-        POSTRequest(baseURL,"Connection","keep-alive",mapAssString,"",bordSufix,true,400,"message","invalid value for name");
+        POSTRequest(baseURL,"Connection","keep-alive",mapAssString,"",bordSufix,true,400,"message","invalid value for name","src/test/resources/json_schemas/common/error_without_name.json");
     }
     String newBord=newBoards();
     @Test
@@ -56,7 +56,7 @@ public void renameBoard(){
         qvery.put("closed", String.valueOf(true));
         String mapAssString = StringUtils.join(qvery.entrySet(),"&");
 
-        PUTRequest(baseURL,mapAssString,"",bordSufix+newBord,false,200,"test","test");
+        PUTRequest(baseURL,mapAssString,"",bordSufix+newBord,true,200,"closed","true","src/test/resources/json_schemas/close_board_schema.json");
 
     }
 
@@ -68,7 +68,7 @@ public void renameBoard(){
         qvery.put("key",API_Key);
         qvery.put("token",API_Token);
         String mapAssString = StringUtils.join(qvery.entrySet(),"&");
-        DELETERequest(baseURL,mapAssString,"",bordSufix+nonExistingBoard,true,404,"","The requested resource was not found.");
+        DELETERequest(baseURL,mapAssString,"",bordSufix+nonExistingBoard,true,404,"","The requested resource was not found.","");
     }
     @AfterClass
     public void deleteClosedBoard(){
@@ -76,7 +76,7 @@ public void renameBoard(){
         qvery.put("key",API_Key);
         qvery.put("token",API_Token);
         String mapAssString = StringUtils.join(qvery.entrySet(),"&");
-        DELETERequest(baseURL,mapAssString,"",bordSufix+newBord,true,200,"_value","null");
+        DELETERequest(baseURL,mapAssString,"",bordSufix+newBord,true,200,"_value","null","src/test/resources/json_schemas/delete_board_schema.json");
 
     }
 

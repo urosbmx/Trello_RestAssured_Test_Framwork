@@ -1,15 +1,17 @@
 package methodes;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
+
+import java.io.File;
 
 import static io.restassured.RestAssured.expect;
 import static io.restassured.RestAssured.urlEncodingEnabled;
 
 public class PUT_Request {
 
-
-    public static void PUTRequest(String URL, String queryParams, String body, String URL_Sufix, Boolean extraStep, int expectStatusCode, String parametarResponse, String expactValue){
+    public static Response PUTRequest(String URL, String queryParams, String body, String URL_Sufix, Boolean extraStep, int expectStatusCode, String parametarResponse, String expactValue,String jsonSchema_Path){
         urlEncodingEnabled = false;
         Response response =null;
         try {
@@ -24,6 +26,7 @@ public class PUT_Request {
                         .then()
                         .log()
                         .all()
+                        .body(JsonSchemaValidator.matchesJsonSchema(new File(jsonSchema_Path)))
                         .extract()
                         .response();
 
@@ -53,5 +56,6 @@ public class PUT_Request {
         }catch (Exception ex){
             System.out.println(ex.getMessage());
         }
+        return response;
     }
 }
