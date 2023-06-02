@@ -60,7 +60,6 @@ public void renameBoard(){
 
     }
 
-
     @Test
     public void deleteNoneExistingBoard() throws NoSuchAlgorithmException {
         String nonExistingBoard = "64739531a86cfcceef46687c";
