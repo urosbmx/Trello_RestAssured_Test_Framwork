@@ -16,8 +16,7 @@ public class TC_02_rename_board extends dataSets {
     String API_Key = Key;
     String API_Token= Token;
 
-    @Test(priority=1,
-            groups = "CreateBoard")
+    @Test(groups = {"CreateBoard","delete_board"})
     public void renameBoard(){
         String boradid = boardID;
         Map<String,String> qvery = new HashMap<>();

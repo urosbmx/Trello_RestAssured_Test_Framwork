@@ -14,7 +14,7 @@ import static methodes.POST_Request.POSTRequest;
 public class TC_06_create_bord_with_description extends dataSets {
 
 
-    @Test(groups = "CreateBoard")
+    @Test(groups = {"CreateBoard","delete_board"})
     public void createBoardWithDescription(){
         Map<String,String> qvery = new HashMap<>();
         qvery.put("name","New-board_name");

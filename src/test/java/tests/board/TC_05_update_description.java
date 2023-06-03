@@ -11,7 +11,7 @@ import static methodes.PUT_Request.PUTRequest;
 
 public class TC_05_update_description extends dataSets {
 
-    @Test(groups = "CreateBoard")
+    @Test(groups = {"CreateBoard","delete_board"})
     public void updateBoard_description(){
         String boradid = boardID;
         Map<String,String> qvery = new HashMap<>();

@@ -56,7 +56,7 @@ public class dataSets {
     }
 
     @AfterGroups(
-            groups = {"CreateBoard","CreateBoardWithList"},
+            groups = {"delete_board"},
             alwaysRun = true,
             description = "Creating new board with list"
     )

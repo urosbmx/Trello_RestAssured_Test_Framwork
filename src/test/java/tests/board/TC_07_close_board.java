@@ -13,7 +13,7 @@ import static methodes.PUT_Request.PUTRequest;
 public class TC_07_close_board extends dataSets {
 
 
-    @Test(groups = "CreateBoard")
+    @Test(groups = {"CreateBoard","delete_board"})
     public void closeBord(){
         Map<String,String> qvery = new HashMap<>();
         qvery.put("key",API_Key);
