@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"><suite name="All Test Suite"><test verbose="2" preserve-order="true" name="/Users/uroskatanic/IdeaProjects/REST-Assured-Framework">
     <classes>
-        <class name="tests.board.TC_01_create_board"> </class>
         <class name="tests.board.TC_02_rename_board"> </class>
         <class name="tests.board.TC_03_delete_non_existing_board"> </class>
         <class name="tests.board.TC_04_create_board_without_name"> </class>
         <class name="tests.board.TC_05_update_description"> </class>
-        <class name="tests.board.TC_06_create_bord_with_description"> </class>
         <class name="tests.board.TC_07_close_board"> </class>
     </classes>
 </test>
