@@ -3,7 +3,10 @@ package DataProvider;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.AfterGroups;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeGroups;
+import org.testng.annotations.BeforeTest;
+
 import java.util.HashMap;
 import java.util.Map;
 import static DataProvider.dataProvider.*;
@@ -18,12 +21,12 @@ public class dataSets {
     public String boardID  ;
     public  static String API_Token= Token;
 
-    @BeforeGroups(
+    @BeforeTest(
             groups = {"CreateBoard"},
             alwaysRun = true,
             description = "Creating new board"
     )
-    public void  newBoards(){
+    public void newBoards(){
 
         Map<String,String> qvery = new HashMap<>();
         qvery.put("name","new_board");
@@ -33,12 +36,11 @@ public class dataSets {
         Response response = POSTRequest(baseURL,"Connection","keep-alive",mapAssString,"",bordSufix,true,200,"name","new_board","src/test/resources/json_schemas/board/create_board_schema.json");
 
        boardID = response.jsonPath().get("id");
-       System.out.println(boardID);
 
     }
 
 
-    @BeforeGroups(
+    @BeforeTest(
             groups = {"CreateBoardWithList"},
             alwaysRun = true,
             description = "Creating new board with list"
@@ -55,7 +57,7 @@ public class dataSets {
 
     }
 
-    @AfterGroups(
+    @AfterTest(
             groups = {"delete_board"},
             alwaysRun = true,
             description = "Creating new board with list"
