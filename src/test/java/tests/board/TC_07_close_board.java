@@ -12,7 +12,7 @@ import static methodes.PUT_Request.PUTRequest;
 
 public class TC_07_close_board extends dataSets {
 
-
+//test this coment
     @Test(groups = {"CreateBoard","delete_board"})
     public void closeBord(){
         Map<String,String> qvery = new HashMap<>();
