@@ -26,5 +26,7 @@
         - name: Run regression
           run: mvn clean test -Dsurefire.suiteXmlFiles=regresion.xml
 
+
         - name: This is just test
           run: echo "This is a test for merging in to main"
+
