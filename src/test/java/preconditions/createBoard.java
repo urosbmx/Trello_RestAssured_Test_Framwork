@@ -36,7 +36,7 @@ public class createBoard {
                 .baseUri(baseURL)
                 .log()
                 .all()
-                .queryParam("name","UrosList")
+                .queryParam("name","UrosList21")
                 .queryParam("key", API_Key)
                 .queryParam("token",API_Token)
                 .body("")
